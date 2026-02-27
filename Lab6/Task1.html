@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Real Time Form Validation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  font-family: Arial;
+  background:#f4f4f4;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.container{
+  background:white;
+  padding:20px;
+  width:350px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+input{
+  width:100%;
+  padding:8px;
+  margin-top:5px;
+  margin-bottom:5px;
+  border:2px solid #ccc;
+  border-radius:5px;
+}
+input.valid{ border-color:green; }
+input.invalid{ border-color:red; }
+.error{
+  color:red;
+  font-size:12px;
+  height:14px;
+}
+button{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  background:#007bff;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+button:disabled{
+  background:gray;
+}
+@media(max-width:400px){
+  .container{width:90%;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Register</h2>
+<form id="form">
+<label>Name</label>
+<input type="text" id="name">
+<div class="error" id="nameError"></div>
+
+<label>Email</label>
+<input type="text" id="email">
+<div class="error" id="emailError"></div>
+
+<label>Password</label>
+<input type="password" id="password">
+<div class="error" id="passwordError"></div>
+
+<label>Confirm Password</label>
+<input type="password" id="confirm">
+<div class="error" id="confirmError"></div>
+
+<label>Age</label>
+<input type="number" id="age">
+<div class="error" id="ageError"></div>
+
+<button type="submit" id="submit" disabled>Submit</button>
+</form>
+</div>
+
+<script>
+const nameInput=document.getElementById("name");
+const email=document.getElementById("email");
+const password=document.getElementById("password");
+const confirmPass=document.getElementById("confirm");
+const age=document.getElementById("age");
+const submit=document.getElementById("submit");
+
+function validate(){
+let valid=true;
+
+// Name
+if(nameInput.value.length>=3){
+nameInput.className="valid";
+document.getElementById("nameError").innerText="";
+}else{
+nameInput.className="invalid";
+document.getElementById("nameError").innerText="Min 3 characters";
+valid=false;
+}
+
+// Email
+if(email.value.includes("@") && email.value.includes(".")){
+email.className="valid";
+document.getElementById("emailError").innerText="";
+}else{
+email.className="invalid";
+document.getElementById("emailError").innerText="Invalid email";
+valid=false;
+}
+
+// Password
+if(password.value.length>=6 && /\d/.test(password.value)){
+password.className="valid";
+document.getElementById("passwordError").innerText="";
+}else{
+password.className="invalid";
+document.getElementById("passwordError").innerText="Min 6 chars + number";
+valid=false;
+}
+
+// Confirm
+if(confirmPass.value===password.value && confirmPass.value!==""){
+confirmPass.className="valid";
+document.getElementById("confirmError").innerText="";
+}else{
+confirmPass.className="invalid";
+document.getElementById("confirmError").innerText="Passwords must match";
+valid=false;
+}
+
+// Age
+if(age.value>=18 && age.value<=60){
+age.className="valid";
+document.getElementById("ageError").innerText="";
+}else{
+age.className="invalid";
+document.getElementById("ageError").innerText="Age 18-60 only";
+valid=false;
+}
+
+submit.disabled=!valid;
+}
+
+document.querySelectorAll("input").forEach(input=>{
+input.addEventListener("input",validate);
+});
+</script>
+
+</body>
+</html>

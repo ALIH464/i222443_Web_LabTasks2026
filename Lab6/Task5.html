@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Counter App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
+background:#f4f4f4;
+}
+.container{
+text-align:center;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+#count{
+font-size:40px;
+margin:20px;
+}
+button{
+padding:10px 15px;
+margin:5px;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Counter</h2>
+<div id="count">0</div>
+<button onclick="change(1)">Increment</button>
+<button onclick="change(-1)">Decrement</button>
+<button onclick="reset()">Reset</button>
+</div>
+
+<script>
+let count=0;
+function change(num){
+count+=num;
+document.getElementById("count").innerText=count;
+}
+function reset(){
+count=0;
+document.getElementById("count").innerText=count;
+}
+</script>
+
+</body>
+</html>

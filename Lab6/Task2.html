@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Profile Card</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#f0f0f0;
+font-family:Arial;
+}
+.card{
+background:white;
+width:300px;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+.card:hover{
+transform:scale(1.05);
+}
+img{
+width:100px;
+border-radius:50%;
+}
+.extra{
+display:none;
+margin-top:10px;
+}
+button{
+margin-top:10px;
+padding:8px 12px;
+border:none;
+background:#007bff;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+<img src="https://via.placeholder.com/100">
+<h3>Ali Haider</h3>
+<p>Reg No: 12345</p>
+<p>Department: BSSE</p>
+
+<div class="extra" id="extra">
+<p>Hobbies: Coding, Gaming</p>
+<p>Skills: MERN, AI</p>
+<p>Email: ali@email.com</p>
+</div>
+
+<button onclick="toggle()" id="btn">Show More</button>
+</div>
+
+<script>
+function toggle(){
+let extra=document.getElementById("extra");
+let btn=document.getElementById("btn");
+
+if(extra.style.display==="none"){
+extra.style.display="block";
+btn.innerText="Show Less";
+}else{
+extra.style.display="none";
+btn.innerText="Show More";
+}
+}
+</script>
+
+</body>
+</html>
