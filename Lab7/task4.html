@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+Rows: <input id="rows">
+Cols: <input id="cols">
+<button onclick="generate()">Generate</button>
+
+<div id="tableArea"></div>
+
+<script>
+
+function generate(){
+
+let r=document.getElementById("rows").value
+let c=document.getElementById("cols").value
+
+let table="<table border=1>"
+
+for(let i=1;i<=r;i++){
+table+="<tr>"
+
+for(let j=1;j<=c;j++){
+table+=`<td onmouseover="this.style.background='yellow'" 
+onmouseout="this.style.background=''">
+(${i},${j})
+</td>`
+}
+
+table+="</tr>"
+}
+
+table+="</table>"
+
+document.getElementById("tableArea").innerHTML=table
+}
+
+</script>
+
+</body>
+</html>

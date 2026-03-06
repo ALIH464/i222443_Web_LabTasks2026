@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Gallery</title>
+<style>
+.gallery img{width:150px;margin:10px;cursor:pointer}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8)}
+.modal img{display:block;margin:10% auto;width:400px}
+</style>
+</head>
+
+<body>
+
+<h2>Image Gallery</h2>
+
+<button onclick="filterImages('all')">All</button>
+<button onclick="filterImages('nature')">Nature</button>
+<button onclick="filterImages('animals')">Animals</button>
+<button onclick="filterImages('architecture')">Architecture</button>
+
+<div id="gallery" class="gallery"></div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+<img id="modalImg">
+<h3 id="modalTitle" style="color:white;text-align:center"></h3>
+</div>
+
+<script>
+
+const images=[
+{url:"https://picsum.photos/200?1",title:"Forest",category:"nature"},
+{url:"https://picsum.photos/200?2",title:"Dog",category:"animals"},
+{url:"https://picsum.photos/200?3",title:"Building",category:"architecture"},
+{url:"https://picsum.photos/200?4",title:"Mountain",category:"nature"},
+{url:"https://picsum.photos/200?5",title:"Cat",category:"animals"}
+]
+
+const gallery=document.getElementById("gallery")
+
+function displayImages(list){
+gallery.innerHTML=""
+list.forEach(img=>{
+let image=document.createElement("img")
+image.src=img.url
+image.dataset.category=img.category
+
+image.onclick=()=>{
+document.getElementById("modal").style.display="block"
+document.getElementById("modalImg").src=img.url
+document.getElementById("modalTitle").innerText=img.title
+}
+
+gallery.appendChild(image)
+})
+}
+
+function filterImages(cat){
+if(cat==="all") displayImages(images)
+else displayImages(images.filter(i=>i.category===cat))
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none"
+}
+
+displayImages(images)
+
+</script>
+
+</body>
+</html>

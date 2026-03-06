@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Mini Kanban Board</h2>
+
+<input id="taskInput" placeholder="New Task">
+<button onclick="addTask()">Add</button>
+
+<div style="display:flex;gap:20px">
+
+<div id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+<h3>To Do</h3>
+</div>
+
+<div id="progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+<h3>In Progress</h3>
+</div>
+
+<div id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+<h3>Done</h3>
+</div>
+
+</div>
+
+<script>
+
+function allowDrop(ev){ev.preventDefault()}
+
+function drag(ev){
+ev.dataTransfer.setData("text",ev.target.id)
+}
+
+function drop(ev){
+ev.preventDefault()
+let data=ev.dataTransfer.getData("text")
+ev.target.appendChild(document.getElementById(data))
+}
+
+function addTask(){
+
+let task=document.createElement("div")
+task.innerText=document.getElementById("taskInput").value
+task.id="task"+Math.random()
+task.draggable=true
+task.ondragstart=drag
+task.style.border="1px solid black"
+task.style.margin="5px"
+
+document.getElementById("todo").appendChild(task)
+
+}
+
+</script>
+
+</body>
+</html>

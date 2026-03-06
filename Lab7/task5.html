@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="search" placeholder="Search" onkeyup="render()">
+
+<table border="1" id="table"></table>
+
+<script>
+
+let students=[
+{name:"Ali",courses:[{name:"AI",score:80},{name:"ML",score:40}]},
+{name:"Sara",courses:[{name:"DB",score:90},{name:"OS",score:70}]},
+{name:"Ahmed",courses:[{name:"AI",score:30},{name:"CN",score:60}]}
+]
+
+function render(){
+
+let search=document.getElementById("search").value.toLowerCase()
+
+let html="<tr><th>Name</th><th>Course</th><th>Score</th></tr>"
+
+students.forEach(s=>{
+
+s.courses.forEach(c=>{
+
+if(s.name.toLowerCase().includes(search)||c.name.toLowerCase().includes(search)){
+
+let color=c.score<50?"salmon":""
+
+html+=`<tr style="background:${color}">
+<td>${s.name}</td>
+<td>${c.name}</td>
+<td>${c.score}</td>
+</tr>`
+}
+
+})
+
+})
+
+document.getElementById("table").innerHTML=html
+}
+
+render()
+
+</script>
+
+</body>
+</html>

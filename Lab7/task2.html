@@ -1,0 +1,67 @@
+2
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Quiz</h2>
+<div id="quiz"></div>
+<button onclick="next()">Next</button>
+<div id="progress"></div>
+
+<script>
+
+const questions=[
+{q:"Capital of Pakistan?",options:["Lahore","Islamabad","Karachi"],correct:"Islamabad"},
+{q:"2+2?",options:["3","4","5"],correct:"4"},
+{q:"HTML stands for?",options:["HyperText Markup Language","HighText Machine","None"],correct:"HyperText Markup Language"},
+{q:"CSS used for?",options:["Styling","Database","Server"],correct:"Styling"},
+{q:"JS used for?",options:["Logic","Design","Both"],correct:"Logic"}
+]
+
+let index=0
+let answers=[]
+
+function load(){
+let q=questions[index]
+let html=`<h3>${q.q}</h3>`
+q.options.forEach(o=>{
+html+=`<input type="radio" name="ans" value="${o}">${o}<br>`
+})
+document.getElementById("quiz").innerHTML=html
+document.getElementById("progress").innerHTML=`Progress: ${index+1}/${questions.length}`
+}
+
+function next(){
+let selected=document.querySelector('input[name="ans"]:checked')
+if(selected) answers.push(selected.value)
+
+index++
+
+if(index<questions.length) load()
+else showResult()
+}
+
+function showResult(){
+
+let html="<table border=1><tr><th>Question</th><th>Your Answer</th><th>Correct</th></tr>"
+
+questions.forEach((q,i)=>{
+let color=answers[i]==q.correct?"lightgreen":"salmon"
+html+=`<tr style="background:${color}">
+<td>${q.q}</td>
+<td>${answers[i]}</td>
+<td>${q.correct}</td>
+</tr>`
+})
+
+html+="</table>"
+
+document.body.innerHTML+=html
+}
+
+load()
+
+</script>
+
+</body>
+</html>
